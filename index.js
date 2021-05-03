@@ -1,14 +1,22 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 
 const app = express();
-const router = express.Router();
+const productRoutes = require('./src/routes/products')
+const authRoutes = require('./src/routes/auth')
+const blogRoutes = require('./src/routes/blog')
 
-router.use('/product', (req, res, next) => {
-    res.json({nama: "Reva Doni Aprilio"})
+app.use(bodyParser.json())
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Method', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');  
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');  
+    next()
 })
 
-app.use('/', router)
+app.use('/v1/customer', productRoutes);
+app.use('/v1/auth', authRoutes);
+app.use('/v1/blog', blogRoutes);
 
-// GET '/users' => [[nama: "Doni"]]
-
-app.listen(4000);
+app.listen(4000);  

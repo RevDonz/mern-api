@@ -1,0 +1,79 @@
+Standar API
+
+{root.api}/{version}/{grouping}/{endpoint}
+SAMPLE : 
+http://mern-api.donzcode.com/v1/auth/login
+
+Standar Status Response
+
+200 - OK                        --> Call API Succeed
+201 - CREATED                   --> POST Succeed
+400 - BAD REQUEST               --> Error on Client Side (Bisa input salah dll)
+401 - UNAUTHORIZED              --> User not authorized to the request
+403 - FORBIDDEN                 --> User not allowed to access
+404 - NOT FOUND                 --> Request Endpoint not found
+500 - INTERNAL SERVER ERROR     --> Error on server side
+502 - BAD GATEWAY               --> Invalid Response From Another Request
+
+Group : Authentication
+[1] - Register
+{root.api}/{version}/auth/register
+
+req:
+{
+    "name": "Testing",
+    "email": "tezt@gmail.com",
+    "password": "password123"
+}
+
+res:
+{
+    "message": "Register Succeed!",
+    "data": {
+        "id": 1,
+        "name": "Testing",
+        "email": "tezt@gmail.com",
+        "password": "password123"
+    }
+}
+
+err-respon:
+400 -> Input yang anda masukkan tidak valid
+
+[2] - Login
+{root.api}/{version}/auth/login
+Group : BLOG
+
+[1] - Create Blog Post
+[POST] : {root.api}/{version}/blog/post
+
+req:
+{
+    "title": "Title Blog",
+    "image": "image.png",
+    "body": "Lorem Ipsum Dolor Sit Amet"
+}
+
+res:
+{
+    "message": "Create Blog Post Success",
+    "data": {
+        "post_id": 1,
+        "title": "Title Blog",
+        "image": "image.png",
+        "body": "Lorem Ipsum Dolor Sit Amet",
+        "created_at": "03/05/2021",
+        "author": {
+            "uid": 1,
+            "name": "nama"
+        }
+    }
+}
+
+err-response:
+201 -> Blog Post berhasil dibuat
+400 -> Input yang anda masukkan tidak valid
+
+[2] - Get Blog Post
+[3] - Update Blog Post
+[4] - Delete Blog Post
